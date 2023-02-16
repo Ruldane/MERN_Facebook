@@ -1,17 +1,17 @@
-import { Formik, Form } from 'formik';
-import { Link } from 'react-router-dom';
-import LoginInput from '../../components/inputs/loginInput';
-import { useState } from 'react';
-import * as Yup from 'yup';
-import RingLoader from 'react-spinners/RingLoader';
-import axios from 'axios';
-import Cookies from 'js-cookie';
-import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { Formik, Form } from "formik";
+import { Link } from "react-router-dom";
+import LoginInput from "../../components/inputs/loginInput";
+import { useState } from "react";
+import * as Yup from "yup";
+import RingLoader from "react-spinners/RingLoader";
+import axios from "axios";
+import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 const loginInfos = {
-  email: '',
-  password: '',
+  email: "",
+  password: "",
 };
 
 export default function LoginForm({ setVisible }) {
@@ -20,7 +20,7 @@ export default function LoginForm({ setVisible }) {
 
   const [login, setLogin] = useState(loginInfos);
   const { email, password } = login;
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
   const handleLoginChange = (e) => {
@@ -37,9 +37,9 @@ export default function LoginForm({ setVisible }) {
           password,
         }
       );
-      dispatch({ type: 'LOGIN', payload: data });
-      Cookies.set('user', JSON.stringify(data));
-      navigate('/');
+      dispatch({ type: "LOGIN", payload: data });
+      Cookies.set("user", JSON.stringify(data));
+      navigate("/");
     } catch (error) {
       setLoading(false);
       setError(error.response.data.message);
@@ -47,8 +47,8 @@ export default function LoginForm({ setVisible }) {
   };
 
   const loginValidation = Yup.object({
-    email: Yup.string().required('Email is required').email('Email is invalid'),
-    password: Yup.string().required('Password is required'),
+    email: Yup.string().required("Email is required").email("Email is invalid"),
+    password: Yup.string().required("Password is required"),
   });
 
   return (
@@ -93,7 +93,7 @@ export default function LoginForm({ setVisible }) {
               </Form>
             )}
           </Formik>
-          <Link to="/forgot" className="forgot_password">
+          <Link to="/reset" className="forgot_password">
             Forgotten password?
           </Link>
           {error && <div className="error_text">{error}</div>}

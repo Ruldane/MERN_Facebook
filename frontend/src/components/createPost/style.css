@@ -1,5 +1,5 @@
 .createPost {
-  background: var (--bg-primary);
+  background: var(--bg-primary);
   border-radius: 10px;
   box-shadow: 0 1px 2px var(--shadow-1);
   margin-top: 1rem;
@@ -27,7 +27,7 @@
   height: 41px;
   flex: 1;
   border-radius: 50px;
-  font-style: 17px;
+  font-size: 17px;
   line-height: 21px;
   display: flex;
   align-items: center;
@@ -38,7 +38,6 @@
   height: 1px;
   width: 95%;
   background: var(--bg-third);
-  margin: 10px 0;
   margin: 7px 10px;
 }
 

@@ -1,12 +1,16 @@
-import './style.css';
-import { ErrorMessage, useField } from 'formik';
-import { useMediaQuery } from 'react-responsive';
+import "./style.css";
+import { ErrorMessage, useField } from "formik";
+import { useMediaQuery } from "react-responsive";
 
 export default function LoginInput({ placeholder, bottom, ...props }) {
   const [field, meta] = useField(props);
 
   const desktopView = useMediaQuery({
-    query: '(min-width: 850px)',
+    query: "(min-width: 850px)",
+  });
+
+  const view1050 = useMediaQuery({
+    query: "(max-width: 1050px)",
   });
 
   return (
@@ -14,21 +18,25 @@ export default function LoginInput({ placeholder, bottom, ...props }) {
       {meta.touched && meta.error && !bottom && (
         <div
           className={
-            desktopView ? 'input_error input_error_desktop' : 'input_error'
+            desktopView && view1050 && field.name === "password"
+              ? "input_error input_error_desktop err_res_pass"
+              : desktopView
+              ? "input_error input_error_desktop"
+              : "input_error"
           }
-          style={{ transform: 'translateY(6px)' }}
+          style={{ transform: "translateY(6px)" }}
         >
           {meta.touched && meta.error && <ErrorMessage name={field.name} />}
           {meta.touched && meta.error && (
             <div
-              className={desktopView ? 'error_arrow_left' : 'error_arrow_top'}
+              className={desktopView ? "error_arrow_left" : "error_arrow_top"}
             ></div>
           )}
         </div>
       )}
       <input
         className={
-          meta.touched && meta.error ? 'input_error_border' : undefined
+          meta.touched && meta.error ? "input_error_border" : undefined
         }
         type={field.type}
         name={field.name}
@@ -39,7 +47,11 @@ export default function LoginInput({ placeholder, bottom, ...props }) {
       {meta.touched && meta.error && bottom && (
         <div
           className={
-            desktopView ? 'input_error input_error_desktop' : 'input_error'
+            desktopView && view1050 && field.name === "conf_password"
+              ? "input_error conf_password_error"
+              : desktopView
+              ? "input_error input_error_desktop"
+              : "input_error"
           }
         >
           {meta.touched && meta.error && <ErrorMessage name={field.name} />}
@@ -47,7 +59,7 @@ export default function LoginInput({ placeholder, bottom, ...props }) {
             <div
               div
               className={
-                desktopView ? 'error_arrow_left' : 'error_arrow_bottom'
+                desktopView ? "error_arrow_left" : "error_arrow_bottom"
               }
             ></div>
           )}
@@ -56,7 +68,7 @@ export default function LoginInput({ placeholder, bottom, ...props }) {
       {meta.touched && meta.error && (
         <i
           className="error_icon"
-          style={{ top: `${!bottom && !desktopView ? '55%' : '15px'}` }}
+          style={{ top: `${!bottom && !desktopView ? "55%" : "15px"}` }}
         ></i>
       )}
     </div>
